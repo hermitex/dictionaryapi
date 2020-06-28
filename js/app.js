@@ -6,7 +6,7 @@ console.log(wordInput.value)
 
 
 const myWord = () => {
-    console.log(wordInput.value)
+    //  DEFINITIONS
     fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/definitions`, {
         // METHOD
         method: 'GET',
@@ -34,7 +34,7 @@ const myWord = () => {
         })
         .catch(error => console.log(error));
 
-
+    // PRONUNCIATIONS
     fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/pronunciation`, {
         // METHOD
         method: 'GET',
@@ -78,7 +78,7 @@ const myWord = () => {
         })
         .catch(error => console.log(error));
 
-
+    // EXAMPLE USAGE
     fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/examples`, {
         // METHOD
         method: 'GET',
