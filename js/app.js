@@ -4,7 +4,6 @@ const btnInput = document.querySelector('.get-def');
 const wordInput = document.querySelector('.my-word');
 
 
-
 const myWord = () => {
     //  DEFINITIONS
     fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/definitions`, {
@@ -19,18 +18,30 @@ const myWord = () => {
     })
         .then(response => response.json())
         .then(data => {
-            let dataOutput = ''
-            document.getElementById('word').innerHTML = `<h2 class="text-success">${data.word}</h2>`
-            document.getElementById('def-found').innerHTML = `<h5 class="text-primary"> Definitions (${data.definitions.length}) </h5> `
-            data.definitions.forEach(def => {
-                dataOutput += `
-                <div class='card card-body mb-3'>
-                <p class="text-success">${def.partOfSpeech}</p>
-                <p>${def.definition}</p>                
-                </div>
-                `;
-            })
-            document.getElementById('definition').innerHTML = dataOutput;
+            if (data.word === undefined) {
+                document.getElementById('definition').innerHTML = `
+                <div class = 'card text-card p-1 text-center'>
+                <h5 class="text-primary ">We've never heard of <span class='text-warning'>${wordInput.value}</span> before 😪. Check the spelling and try again 😊</h5>
+                </div>`
+            }
+
+            else {
+                let dataOutput = ''
+                document.getElementById('word').innerHTML = `<h2 class="text-success">${data.word}</h2>`
+                document.getElementById('def-found').innerHTML = `<h5 class="text-primary"> Definitions (${data.definitions.length}) </h5> `
+                data.definitions.forEach(def => {
+                    dataOutput += `
+            <div class='card card-body mb-3'>
+            <p class="text-success">${def.partOfSpeech}</p>
+            <p>${def.definition}</p>                
+            </div>
+            `;
+                })
+                document.getElementById('definition').innerHTML = dataOutput;
+
+            }
+
+
         })
         .catch(error => console.log(error));
 
@@ -67,14 +78,21 @@ const myWord = () => {
         .then(data => {
 
             let synonym = ''
-            data.synonyms.forEach(syn => {
-                synonym += `                             
-                    <li class="text-success list-group-item">${syn}</li>             
-                    `;
-            })
-            document.getElementById('synonym').innerHTML = `
-            <h5 class="text-primary"> Synonyms </h5>
-            ${synonym}`;
+            if (data.synonyms.length !== 0) {
+                data.synonyms.forEach(syn => {
+                    synonym += `                             
+                        <li class="text-success list-group-item">${syn}</li>             
+                        `;
+                })
+                document.getElementById('synonym').innerHTML = `
+                <h5 class="text-primary"> Synonyms (${data.synonyms.length}) </h5>
+                ${synonym}`;
+            } else {
+                document.getElementById('synonym').innerHTML = `
+                <h5 class="text-primary"> Synonyms (${data.synonyms.length})</h5>
+                <p class="text-warning"> No synonyms found </p>`
+            }
+
         })
         .catch(error => console.log(error));
 
@@ -91,16 +109,22 @@ const myWord = () => {
     })
         .then(response => response.json())
         .then(data => {
-
             let example = ''
-            data.examples.forEach(ex => {
-                example += `                             
-                        <li class="text-success list-group-item">${ex}</li>             
-                        `;
-            })
-            document.getElementById('examples').innerHTML = `
-                <h5 class="text-primary"> Examples Usage </h5>
+            if (data.examples.length !== 0) {
+                data.examples.forEach(ex => {
+                    example += `                             
+                <li class="text-success list-group-item">${ex}</li>             
+                `;
+                })
+
+                document.getElementById('examples').innerHTML = `
+                <h5 class="text-primary"> Examples Usage (${data.examples.length}) </h5>
                 ${example}`;
+            } else {
+                document.getElementById('examples').innerHTML = `
+                <h5 class="text-primary"> Examples Usage (${data.examples.length})</h5>
+                <p class="text-warning"> No examples found </p>`
+            }
         })
         .catch(error => console.log(error));
 }
