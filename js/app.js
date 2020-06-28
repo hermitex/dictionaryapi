@@ -45,18 +45,18 @@ const myWord = () => {
 
         })
         .catch(error => console.alert(error));
-
-    // PRONUNCIATIONS
-    fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/pronunciation`, {
-        // METHOD
-        method: 'GET',
-        // HEADERS
-        headers: {
-            "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-            "x-rapidapi-key": "ab180751a9msh039c104edc4e1a7p1220fcjsn86aa8d749af3",
-            "useQueryString": true
-        }
-    })
+    console.
+        // PRONUNCIATIONS
+        fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/pronunciation`, {
+            // METHOD
+            method: 'GET',
+            // HEADERS
+            headers: {
+                "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+                "x-rapidapi-key": "ab180751a9msh039c104edc4e1a7p1220fcjsn86aa8d749af3",
+                "useQueryString": true
+            }
+        })
         .then(response => response.json())
         .then(data => {
 
