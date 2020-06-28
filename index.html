@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/bcbb5e63ec.js" crossorigin="anonymous" SameSite SameSite=None></script>
     <link rel="stylesheet" href="./public/bts.css">
     <link rel="stylesheet" href="./public/style.css">
     <title>Smart Dict</title>
@@ -12,19 +13,27 @@
 <body>
     <div class="container">
         <div class="mb-4 text-center">
+            <span></span>
             <h1 class="text-primary text-center heading">Define My Phrase</h1>
             <input class="my-word p-2 m-1" type="text" value="" placeholder="Enter your word">
             <button class="btn btn-success get-def m-1">Definition</button>
         </div>
+        <select id="select" class="text-success bg-light p-1">
+
+        </select>
+        <i id="pronuonce" class="fas fa-volume-up text-primary no_blink"></i>
         <div id="word">
 
         </div>
+
         <span id="pronunciation">
 
         </span>
+
         <div id="def-found">
 
         </div>
+
         <div class=" text-card" id="definition">
         </div>
         <ul id="examples" class="list-group mb-1 ">
