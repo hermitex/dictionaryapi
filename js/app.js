@@ -128,6 +128,7 @@ const myWord = () => {
             }
         })
         .catch(error => console.log(error));
+    wordInput.value = '';
 }
 
 
