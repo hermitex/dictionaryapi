@@ -4,6 +4,9 @@ const btnInput = document.querySelector('.get-def');
 const wordInput = document.querySelector('.my-word');
 const selectVoice = document.querySelector('#select');
 const pronuonce = document.querySelector('#pronuonce');
+const result = document.querySelector('#results');
+const error = document.querySelector('#error');
+
 // Speech
 const synth = window.speechSynthesis;
 let voices = [];
@@ -22,16 +25,7 @@ const myWord = () => {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.word === undefined) {
-                console.log(wordInput.value)
-                // errorMessage(data.word)
-                document.getElementById('definition').innerHTML = `
-                <div class = 'card text-card p-1 text-center'>
-                <h5 class="text-primary ">We've never heard of <span class='text-warning'>${wordInput.value}</span> before 😪. Check the spelling and try again 😊</h5>
-                </div>`
-            }
-
-            else {
+            if (data.word !== undefined) {
                 let dataOutput = ''
                 document.getElementById('word').innerHTML = `<h2 class="text-success">${data.word}</h2>`
                 document.getElementById('def-found').innerHTML = `<h5 class="text-primary"> Definitions (${data.definitions.length}) </h5> `
@@ -44,7 +38,19 @@ const myWord = () => {
             `;
                 })
                 document.getElementById('definition').innerHTML = dataOutput;
+                result.style.display = 'block';
+                error.style.display = 'none';
+            }
 
+            else {
+                console.log(wordInput.value)
+                // errorMessage(data.word)
+                document.getElementById('error').innerHTML = `
+                <div class = 'card text-card p-1 text-center'>
+                <h5 class="text-primary ">We've never heard of <span class='text-warning'>${wordInput.value}</span> before 😪. Check the spelling and try again 😊</h5>
+                </div>`
+                result.style.display = 'none';
+                error.style.display = 'block';
             }
 
 
