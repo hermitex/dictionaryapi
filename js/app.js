@@ -32,10 +32,78 @@ const myWord = () => {
             })
             document.getElementById('definition').innerHTML = dataOutput;
         })
-        .catch(error => console.error(error));
-};
+        .catch(error => console.log(error));
 
 
+    fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/pronunciation`, {
+        // METHOD
+        method: 'GET',
+        // HEADERS
+        headers: {
+            "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+            "x-rapidapi-key": "ab180751a9msh039c104edc4e1a7p1220fcjsn86aa8d749af3",
+            "useQueryString": true
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            document.getElementById('pronunciation').innerHTML = `pronunciation: ${data.pronunciation.all}`;
+        })
+        .catch(error => console.log(error));
+
+
+    fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/synonyms`, {
+        // METHOD
+        method: 'GET',
+        // HEADERS
+        headers: {
+            "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+            "x-rapidapi-key": "ab180751a9msh039c104edc4e1a7p1220fcjsn86aa8d749af3",
+            "useQueryString": true
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            let synonym = ''
+            data.synonyms.forEach(syn => {
+                synonym += `                             
+                    <li class="text-success list-group-item">${syn}</li>             
+                    `;
+            })
+            document.getElementById('synonym').innerHTML = `
+            <h5 class="text-primary"> Synonyms </h5>
+            ${synonym}`;
+        })
+        .catch(error => console.log(error));
+
+
+    fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/examples`, {
+        // METHOD
+        method: 'GET',
+        // HEADERS
+        headers: {
+            "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+            "x-rapidapi-key": "ab180751a9msh039c104edc4e1a7p1220fcjsn86aa8d749af3",
+            "useQueryString": true
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            let example = ''
+            data.examples.forEach(ex => {
+                example += `                             
+                        <li class="text-success list-group-item">${ex}</li>             
+                        `;
+            })
+            document.getElementById('examples').innerHTML = `
+                <h5 class="text-primary"> Examples Usage </h5>
+                ${example}`;
+        })
+        .catch(error => console.log(error));
+}
 
 
 btnInput.addEventListener('click', () => myWord());
