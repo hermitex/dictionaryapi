@@ -4,18 +4,6 @@ const btnInput = document.querySelector('.get-def');
 const wordInput = document.querySelector('.my-word');
 console.log(wordInput.value)
 
-// const getInput = () => input.value;
-const composeDefinition = (info) => {
-    // let searchWord = info.word;
-    let definitionsObtained = info.definitions;
-    // let numberOfDefinitions = info.definitions.length;
-    definitionsObtained.forEach(def => {
-        definition.innerHTML = `<p>${def.definition}</p>`
-        console.log(definition.innerHTML)
-    });
-
-};
-{/* <h2 class="text-primary">${searchWord}</h2> \n ${numberOfDefinitions} definitions \n      \n def:  */ }
 
 const myWord = () => {
     console.log(wordInput.value)
@@ -30,7 +18,18 @@ const myWord = () => {
         }
     })
         .then(response => response.json())
-        .then(data => composeDefinition(data))
+        .then(data => {
+            let dataOutput = ''
+            data.definitions.forEach(def => {
+                dataOutput += `
+                <div class='card card-body mb-3'>
+                <h3>${def.definition}</h3>
+                <p>${def.partOfSpeech}</p>
+                </div>
+                `;
+            })
+            document.getElementById('definition').innerHTML = dataOutput;
+        })
         .catch(error => console.error(error));
 };
 
