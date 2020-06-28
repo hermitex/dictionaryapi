@@ -19,6 +19,7 @@ const myWord = () => {
         .then(response => response.json())
         .then(data => {
             if (data.word === undefined) {
+                console.log(wordInput.value)
                 // errorMessage(data.word)
                 document.getElementById('definition').innerHTML = `
                 <div class = 'card text-card p-1 text-center'>
@@ -128,7 +129,7 @@ const myWord = () => {
             }
         })
         .catch(error => console.log(error));
-    wordInput.value = '';
+    // wordInput.value = '';
 }
 
 
