@@ -19,6 +19,7 @@ const myWord = () => {
         .then(response => response.json())
         .then(data => {
             if (data.word === undefined) {
+                // errorMessage(data.word)
                 document.getElementById('definition').innerHTML = `
                 <div class = 'card text-card p-1 text-center'>
                 <h5 class="text-primary ">We've never heard of <span class='text-warning'>${wordInput.value}</span> before 😪. Check the spelling and try again 😊</h5>
@@ -43,7 +44,7 @@ const myWord = () => {
 
 
         })
-        .catch(error => console.log(error));
+        .catch(error => console.alert(error));
 
     // PRONUNCIATIONS
     fetch(`https://wordsapiv1.p.rapidapi.com/words/${wordInput.value}/pronunciation`, {
