@@ -25,8 +25,8 @@ const myWord = () => {
             data.definitions.forEach(def => {
                 dataOutput += `
                 <div class='card card-body mb-3'>
-                <p>${def.definition}</p>
                 <p class="text-success">${def.partOfSpeech}</p>
+                <p>${def.definition}</p>                
                 </div>
                 `;
             })
