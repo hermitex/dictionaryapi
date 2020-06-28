@@ -21,7 +21,7 @@ const myWord = () => {
         .then(data => {
             let dataOutput = ''
             document.getElementById('word').innerHTML = `<h2 class="text-success">${data.word}</h2>`
-            document.getElementById('def-found').innerHTML = `<small class="text-primary">${data.definitions.length} definitions</small>`
+            document.getElementById('def-found').innerHTML = `<h5 class="text-primary"> Definitions (${data.definitions.length}) </h5> `
             data.definitions.forEach(def => {
                 dataOutput += `
                 <div class='card card-body mb-3'>
@@ -48,7 +48,7 @@ const myWord = () => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            document.getElementById('pronunciation').innerHTML = `pronunciation: ${data.pronunciation.all}`;
+            document.getElementById('pronunciation').innerHTML = `<span class='text-primary'>pronunciation:</span> <span class='text-success'>${data.pronunciation.all}</span>`;
         })
         .catch(error => console.log(error));
 
