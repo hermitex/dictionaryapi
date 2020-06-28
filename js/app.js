@@ -2,7 +2,7 @@
 const definition = document.querySelector('.definition');
 const btnInput = document.querySelector('.get-def');
 const wordInput = document.querySelector('.my-word');
-console.log(wordInput.value)
+
 
 
 const myWord = () => {
@@ -47,7 +47,7 @@ const myWord = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+
             document.getElementById('pronunciation').innerHTML = `<span class='text-primary'>pronunciation:</span> <span class='text-success'>${data.pronunciation.all}</span>`;
         })
         .catch(error => console.log(error));
@@ -65,7 +65,7 @@ const myWord = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+
             let synonym = ''
             data.synonyms.forEach(syn => {
                 synonym += `                             
@@ -91,7 +91,7 @@ const myWord = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+
             let example = ''
             data.examples.forEach(ex => {
                 example += `                             
