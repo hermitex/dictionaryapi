@@ -20,11 +20,13 @@ const myWord = () => {
         .then(response => response.json())
         .then(data => {
             let dataOutput = ''
+            document.getElementById('word').innerHTML = `<h2 class="text-success">${data.word}</h2>`
+            document.getElementById('def-found').innerHTML = `<small class="text-primary">${data.definitions.length} definitions</small>`
             data.definitions.forEach(def => {
                 dataOutput += `
                 <div class='card card-body mb-3'>
-                <h3>${def.definition}</h3>
-                <p>${def.partOfSpeech}</p>
+                <p>${def.definition}</p>
+                <p class="text-success">${def.partOfSpeech}</p>
                 </div>
                 `;
             })
